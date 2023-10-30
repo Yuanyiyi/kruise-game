@@ -122,6 +122,14 @@ kustomize: $(KUSTOMIZE) ## Download kustomize locally if necessary.
 $(KUSTOMIZE): $(LOCALBIN)
 	curl -s $(KUSTOMIZE_INSTALL_SCRIPT) | bash -s -- $(subst v,,$(KUSTOMIZE_VERSION)) $(LOCALBIN)
 
+# 上述执行失败时, 直接执行：
+# 下载https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh到本地
+# bash install_kustomize.sh $(subst v,,$(KUSTOMIZE_VERSION)) $(LOCALBIN)
+# KUSTOMIZE = $(LOCALBIN)
+# KUSTOMIZE_INSTALL_SCRIPT ?= "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
+# .PHONY: kustomize
+# kustomize: $(KUSTOMIZE) ## Download kustomize locally if necessary.
+
 .PHONY: controller-gen
 controller-gen: $(CONTROLLER_GEN) ## Download controller-gen locally if necessary.
 $(CONTROLLER_GEN): $(LOCALBIN)

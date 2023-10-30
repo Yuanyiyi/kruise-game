@@ -8,6 +8,8 @@ COPY go.sum go.sum
 # cache deps before building and copying source so that we don't need to re-download as much
 # and so that source changes don't invalidate our downloaded layer
 RUN go mod download
+# 上一步若出现timeout.io，替换为下面（参考https://github.com/goproxy/goproxy.cn/issues/93）
+# RUN gGO111MODUL=on GOPROXY=https://goproxy.cn,direct go mod download
 
 # Copy the go source
 COPY main.go main.go
